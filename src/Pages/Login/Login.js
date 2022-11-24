@@ -3,14 +3,16 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
-    const { register, formState: {errors} } = useForm()
+    const { register, formState: {errors}, handleSubmit } = useForm()
+    const handleLogin = data =>{
+        console.log(data);
+    }
     
     return (
         <div className='flex justify-center'>
-            <h2 className='text-3xl'>Login</h2>
             <div className='w-96 p-7'>
-                <h2 className='text-2xl text-center'>Login</h2>
-                <form >
+                <h2 className='text-3xl text-center'>Login</h2>
+                <form onSubmit={handleSubmit(handleLogin)}>
                    
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
@@ -45,7 +47,7 @@ const Login = () => {
                     </div>
                     <input className='btn btn-primary w-full' value='Login' type="submit" />
                 </form>
-                <p>New to Doctors Portal <Link className=' text-green-600' to='/register'>Create new account</Link> </p>
+                <p>New to used laptop buzzer <Link className=' text-green-600' to='/register'>Create new account</Link> </p>
                 <div className='divider'>OR</div>
 
                 <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>

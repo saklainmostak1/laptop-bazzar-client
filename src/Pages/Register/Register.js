@@ -3,12 +3,16 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
-    const {register,  formState: {errors}} = useForm()
+    const {register,  formState: {errors}, handleSubmit} = useForm()
+
+    const handleRegister = data =>{
+        console.log(data);
+    }
     return (
         <div className='flex justify-center'>
             <div className='w-96 p-7'>
                 <h2 className='text-2xl text-center'>Register</h2>
-                <form >
+                <form onSubmit={handleSubmit(handleRegister)}>
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
                             <span className="label-text">Name</span>
@@ -39,7 +43,7 @@ const Register = () => {
                             {...register('password', {
                                 required: 'Password is required',
                                 minLength: {value: 6, message: 'password must be 6 character'},
-                                pattern: {value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'password must be strong'}
+                                pattern: {value: /(?=.*[A-Z])(?=.*[0-9])/, message: 'password must be strong'}
                             })}  
                             className="input input-bordered w-full max-w-xs" />    
                             {errors.password && <p className='text-red-500'>{errors.password.message}</p>} 
