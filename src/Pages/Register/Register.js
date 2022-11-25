@@ -2,7 +2,7 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 
 
@@ -10,6 +10,7 @@ const Register = () => {
     const googleProvider = new GoogleAuthProvider()
     const {createUser, googleLogin, updateUser} = useContext(AuthContext)
     const [signUpError, setSignUpError] = useState('')
+    const navigate = useNavigate()
     const handleRegister = event => {
         event.preventDefault()
         const form = event.target 
@@ -28,7 +29,9 @@ const Register = () => {
             displayName: name,
           }
           updateUser(userInfo)
-          .then(() => {})
+          .then(() => {
+            navigate('/')
+          })
           .catch(error => console.log(error))
         })
         .catch(error => {
@@ -66,7 +69,7 @@ const Register = () => {
                             </label>
                             <select name='user' className="select select-bordered w-full max-w-xs">
                                 <option>Seller</option>
-                                <option>User</option>
+                                <option>Buyers</option>
                             </select>
                         </div>
                         <div className="form-control">

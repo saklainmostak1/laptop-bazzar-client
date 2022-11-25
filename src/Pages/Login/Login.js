@@ -56,7 +56,7 @@ const Login = () => {
                             </label>
                             <select name='user' className="select select-bordered w-full max-w-xs">
                                 <option>Seller</option>
-                                <option>User</option>
+                                <option>Buyers</option>
                             </select>
                         </div>
                         <div className="form-control">

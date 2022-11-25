@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthProvider';
 
 const BookingModal = ({ bookingLaptop, setBookingLaptop }) => {
@@ -17,15 +18,30 @@ const BookingModal = ({ bookingLaptop, setBookingLaptop }) => {
 
 
         const booking = {
-            products, 
-            prices, 
-            user, 
-            email, 
-            phone, 
+            products,
+            prices,
+            user,
+            email,
+            phone,
             location,
         }
-        console.log(booking);
-        setBookingLaptop(null)
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+
+        })
+            .then(Response => Response.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    setBookingLaptop(null)
+                    toast.success('SucessFully Booking')
+                }
+
+            })
     }
     return (
         <div>
@@ -39,8 +55,8 @@ const BookingModal = ({ bookingLaptop, setBookingLaptop }) => {
                         <input name='price' defaultValue={resale_price} type="text" placeholder="Type here" className="input input-bordered input-primary w-full " disabled />
                         <input name='userName' defaultValue={user?.displayName} type="text" placeholder="Type here" className="input input-bordered input-primary w-full " disabled />
                         <input name='email' defaultValue={user.email} type="text" placeholder="Type here" className="input input-bordered input-primary w-full " disabled />
-                        <input name='phone' type="text" placeholder="Your Phone Number" className="input input-bordered input-primary w-full " required/>
-                        <input name='location' type="text" placeholder="Your Location" className="input input-bordered input-primary w-full " required/>
+                        <input name='phone' type="text" placeholder="Your Phone Number" className="input input-bordered input-primary w-full " required />
+                        <input name='location' type="text" placeholder="Your Location" className="input input-bordered input-primary w-full " required />
                         <br />
                         <input className='w-full btn btn-outline' type="submit" value="Submit" />
                     </form>
