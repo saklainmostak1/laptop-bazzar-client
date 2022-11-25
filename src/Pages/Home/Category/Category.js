@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CategoryCard from './CategoryCard';
 
 const Category = () => {
+
     const [categoryLaptops, setCategoryLaptops] = useState([])
 
 
@@ -11,7 +12,7 @@ const Category = () => {
         .then(data => setCategoryLaptops(data))
     }, [])
     return (
-        <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6'>
             
             {
                 categoryLaptops.map(laptop => <CategoryCard
