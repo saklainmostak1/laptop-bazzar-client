@@ -1,5 +1,5 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { AuthContext } from '../../context/AuthProvider';
 const Register = () => {
     const googleProvider = new GoogleAuthProvider()
     const {createUser, googleLogin, updateUser} = useContext(AuthContext)
+    const [signUpError, setSignUpError] = useState('')
     const handleRegister = event => {
         event.preventDefault()
         const form = event.target 
@@ -17,6 +18,7 @@ const Register = () => {
         const email = form.email.value
         const password = form.password.value
         console.log(name,users, email  , password);
+        setSignUpError('')
         createUser(email, password)
         .then(result => {
           const user = result.user
@@ -24,7 +26,6 @@ const Register = () => {
           toast.success('sucessFully create user')
           const userInfo = {
             displayName: name,
-            userType: users
           }
           updateUser(userInfo)
           .then(() => {})
@@ -32,6 +33,7 @@ const Register = () => {
         })
         .catch(error => {
           console.error(error)
+          setSignUpError(error.message)
   
         })
     }
@@ -82,8 +84,11 @@ const Register = () => {
                                 <p className="label-text-alt link link-hover">Forgot password?</p>
                             </label>
                         </div>
+                        {
+                            signUpError && <p className='text-red-500'>{signUpError}</p>
+                        }
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
+                            <button className="btn btn-primary">Register</button>
                         </div>
                         <p>Already Have An Account <Link className=' text-green-600' to='/login'> Go to  Login Please!!!</Link> </p>
                         <div className='divider'>OR</div>

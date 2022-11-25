@@ -1,25 +1,30 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 
 const Login = () => {
     const {googleLogin, logIn} = useContext(AuthContext)
     const googleProvider = new GoogleAuthProvider()
+    const location = useLocation()
     const navigate = useNavigate()
+
+    const from = location.state?.from?.pathname || '/'
+
+    
     const handleLogin = event => {
         event.preventDefault()
         const form = event.target
         const users = form.user.value
         const email = form.email.value
         const password = form.password.value
-        logIn(email, password)
+        logIn(email, password, users)
         .then(result => {
             const user = result.user
-            navigate('/')
-            toast.success('SucessFully Login')
             console.log(user);
+            navigate(from, {replace: true} )
+            toast.success('SucessFully Login')
         })
         .catch(error => {
        console.log(error);
