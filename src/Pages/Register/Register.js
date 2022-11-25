@@ -1,5 +1,6 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
@@ -7,10 +8,10 @@ import { AuthContext } from '../../context/AuthProvider';
 
 const Register = () => {
     const googleProvider = new GoogleAuthProvider()
-    const {createUser, googleLogin} = useContext(AuthContext)
+    const {createUser, googleLogin, updateUser} = useContext(AuthContext)
     const handleRegister = event => {
         event.preventDefault()
-        const form = event.target
+        const form = event.target 
         const name = form.name.value
         const users = form.user.value
         const email = form.email.value
@@ -20,7 +21,14 @@ const Register = () => {
         .then(result => {
           const user = result.user
           console.log(user)
-          form.reset('')
+          toast.success('sucessFully create user')
+          const userInfo = {
+            displayName: name,
+            userType: users
+          }
+          updateUser(userInfo)
+          .then(() => {})
+          .catch(error => console.log(error))
         })
         .catch(error => {
           console.error(error)

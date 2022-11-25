@@ -15,7 +15,7 @@ const Category = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6'>
             
             {
-                categoryLaptops.map(laptop => <CategoryCard
+                categoryLaptops?.map(laptop => <CategoryCard
                 key={laptop._id}
                 laptop={laptop}
                 ></CategoryCard>)

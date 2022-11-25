@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useLoaderData } from 'react-router-dom';
+import LaptopCards from './LaptopCards';
+
 
 const AllLaptops = () => {
-    const [categoryLaptops, setCategoryLaptops] = useState([])
-    console.log(categoryLaptops);
-
-
-    useEffect(() =>{
-        fetch('http://localhost:5000/allLaptops')
-        .then(Response => Response.json())
-        .then(data => {
-            console.log(data)
-            setCategoryLaptops(data[0])
-        })
-    }, [])
+    const laptops = useLoaderData([])
+    
+    console.log(laptops);
     return (
-        <div>
-            <p>All laptop: {categoryLaptops.length} </p>
-
-           
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6 gap-6'>
+            {
+                laptops?.map(laptop => <LaptopCards
+                key={laptop._id}
+                laptop={laptop}
+                ></LaptopCards> )
+            }
+            
         </div>
     );
 };
