@@ -1,8 +1,7 @@
 import React from 'react';
 
-const LaptopCards = ({ laptop }) => {
-  console.log(laptop);
-
+const LaptopCards = ({ laptop, setBookingLaptop }) => {
+  
   const { details, img, location, original_price, posted_date, product_name, resale_price, seller_name, uses_year } = laptop
   return (
     <div className="card m-10 shadow-xl">
@@ -23,7 +22,9 @@ const LaptopCards = ({ laptop }) => {
         </div>
         <p className='text-center my-5'>{details}</p>
         <div className="card-actions justify-center">
-          <button className="btn btn-primary">Book Now</button>
+        <label onClick={() => setBookingLaptop(laptop)} 
+        htmlFor="booking-modal" 
+        className="btn btn-primary">Book Now</label>
         </div>
       </div>
     </div>
