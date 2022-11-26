@@ -1,18 +1,26 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
-    const {googleLogin, logIn} = useContext(AuthContext)
+    const { googleLogin, logIn } = useContext(AuthContext)
     const googleProvider = new GoogleAuthProvider()
+
+    const [loginUserEmail, setLoginUserEmail] = useState('')
+    const [token] = useToken(loginUserEmail)
     const location = useLocation()
     const navigate = useNavigate()
 
+
     const from = location.state?.from?.pathname || '/'
 
-    
+    if (token) {
+        navigate(from, { replace: true })
+        toast.success('SucessFully Login')
+    }
     const handleLogin = event => {
         event.preventDefault()
         const form = event.target
@@ -20,27 +28,27 @@ const Login = () => {
         const email = form.email.value
         const password = form.password.value
         logIn(email, password, users)
-        .then(result => {
-            const user = result.user
-            console.log(user);
-            navigate(from, {replace: true} )
-            toast.success('SucessFully Login')
-        })
-        .catch(error => {
-       console.log(error);
-        })
+            .then(result => {
+                const user = result.user
+                console.log(user);
+                setLoginUserEmail(email)
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
 
         // console.log( email, users, password);
     }
-    
+
     const handleGoogleSignIn = () => {
         return googleLogin(googleProvider)
-          .then(result => {
-            const user = result.user
-            console.log(user);
-          })
-          .catch(error => console.error(error))
-      }
+            .then(result => {
+                const user = result.user
+                console.log(user);
+            })
+            .catch(error => console.error(error))
+    }
 
     return (
         <div className="hero ">
