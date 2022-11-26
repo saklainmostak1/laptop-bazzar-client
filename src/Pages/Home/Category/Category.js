@@ -20,22 +20,25 @@ const Category = () => {
         return <Loading></Loading>
     }
 
-    // useEffect(() =>{
+    // useEffect(() =>{  
     //     fetch('http://localhost:5000/categoryNames')
     //     .then(Response => Response.json())
     //     .then(data => setCategoryLaptops(data))
     // }, [])
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6'>
-            
-            {
-                categoryLaptops?.map(laptop => <CategoryCard
-                key={laptop._id}
-                laptop={laptop}
-                ></CategoryCard>)
-            }
+       <div>
+        <h2 className='text-3xl text-center'>All Laptop</h2>
+         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6'>
            
-        </div>
+           {
+               categoryLaptops?.map(laptop => <CategoryCard
+               key={laptop._id}
+               laptop={laptop}
+               ></CategoryCard>)
+           }
+          
+       </div>
+       </div>
     );
 };
 
