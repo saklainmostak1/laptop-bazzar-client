@@ -61,7 +61,7 @@ const Register = () => {
         const saveUser = {
             email, 
             name,
-            users
+            role: users
         }
         fetch('http://localhost:5000/users', {
             method: 'POST',
