@@ -27,6 +27,19 @@ const AllUsers = () => {
             }
         })
     }
+    const handleDelete = (id) =>{
+        const proceed = window.confirm('Are You Sure delete')
+        if(proceed){
+            fetch(`http://localhost:5000/users/${id}`, {
+                method: 'DELETE'
+            })
+            .then(Response => Response.json())
+            .then(data => {
+                console.log(data);
+                refetch()
+            })
+        }
+    }
     return (
         <div>
             <h2 className="text-3xl">All Users</h2>
@@ -55,7 +68,9 @@ const AllUsers = () => {
                                 onClick={()=> handleMakeAdmin (user._id)}
                                  className='btn btn-primary btn-xs'>Make Admin</button>
                                     } </td>
-                                <td> <button className='btn btn-accent btn-xs'>Delete</button></td>
+                                <td> <button 
+                                onClick={() => handleDelete(user?._id)}
+                                className='btn btn-accent btn-xs'>Delete</button></td>
                             </tr>)
                         }
                     </tbody>
