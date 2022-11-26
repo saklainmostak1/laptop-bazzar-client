@@ -4,13 +4,21 @@ import toast from 'react-hot-toast';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 
 const Register = () => {
     const googleProvider = new GoogleAuthProvider()
     const {createUser, googleLogin, updateUser} = useContext(AuthContext)
     const [signUpError, setSignUpError] = useState('')
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
+
+    const [token] = useToken(createdUserEmail)
     const navigate = useNavigate()
+
+    if(token){
+        navigate('/')
+    }
 
     const handleRegister = event => {
         event.preventDefault()
@@ -64,12 +72,22 @@ const Register = () => {
         })
         .then(Response => Response.json())
         .then(data => {
-            console.log(data)
-            navigate('/')
+            setCreatedUserEmail(email)
+         
         })
 
         
     }
+    // const getUserToken = email =>{
+    //     fetch(`http://localhost:5000/jwt?email=${email}`)
+    //     .then(Response => Response.json())
+    //     .then(data => {
+    //         if(data.accessToken){
+    //             localStorage.setItem('accessToken', data.accessToken)
+    //             navigate('/')
+    //         }
+    //     } )
+    // }
    
 
     const handleGoogleSignIn = () => {
