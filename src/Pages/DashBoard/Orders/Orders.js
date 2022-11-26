@@ -40,7 +40,7 @@ const Orders = () => {
                         <th>Price</th>
                         <th>Phone</th>
                         <th>Location</th>
-                        <th>Location</th>
+                        <th>Payment</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,6 +54,7 @@ const Orders = () => {
                         <td>{booking.prices}</td>
                         <td>{booking.phone}</td>
                         <td>{booking.location}</td>
+                        <td><button className='btn btn-primary btn-xs'>Payment</button></td>
                     </tr>)
                     }
                 </tbody>

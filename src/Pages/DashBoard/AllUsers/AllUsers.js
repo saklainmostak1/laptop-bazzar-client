@@ -3,7 +3,7 @@ import React from 'react';
 import toast from 'react-hot-toast';
 
 const AllUsers = () => {
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [], refetch, status } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/users')
@@ -40,6 +40,24 @@ const AllUsers = () => {
             })
         }
     }
+    const handleVerify = id =>{
+        fetch(`http://localhost:5000/users/${id}`, {
+            method: "PATCH",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({status: 'Verified'})
+        })
+        .then(Response => Response.json())
+        .then(data => {
+            console.log(data);
+            if(data.modifiedCount > 0){
+              refetch()
+            
+            }
+        })
+
+    }
     return (
         <div>
             <h2 className="text-3xl">All Users</h2>
@@ -52,12 +70,15 @@ const AllUsers = () => {
                             <th>email</th>
                             <th>User Type</th>
                             <th>Admin</th>
+                            <th>Verify</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            users?.map((user, i) => <tr className="hover">
+                            users?.map((user, i) => <tr 
+                            key={user._id}
+                            className="hover">
                                 <th>{i + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
@@ -68,6 +89,18 @@ const AllUsers = () => {
                                 onClick={()=> handleMakeAdmin (user._id)}
                                  className='btn btn-primary btn-xs'>Make Admin</button>
                                     } </td>
+                                    <td>
+                                        {
+                                            user?.role === 'Seller' &&
+                                            <button 
+                                            onClick={() => handleVerify(user._id)}
+                                            className='btn btn-warning btn-xs'>{user?.status ? status : 'pending'} </button>
+                                        }
+
+                                        {/* <button className='btn btn-active btn-ghost btn-xs'>
+                                            {status ? status : 'Not Verify'}
+                                        </button> */}
+                                    </td>
                                 <td> <button 
                                 onClick={() => handleDelete(user?._id)}
                                 className='btn btn-accent btn-xs'>Delete</button></td>

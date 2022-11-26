@@ -4,7 +4,11 @@ import Main from "../../Layout/Main";
 import Blog from "../../Pages/Blog/Blog";
 import AddProducts from "../../Pages/DashBoard/AddProducts/AddProducts";
 import AllUsers from "../../Pages/DashBoard/AllUsers/AllUsers";
+import MyBuyers from "../../Pages/DashBoard/MyBuyers/MyBuyers";
+import MyProducts from "../../Pages/DashBoard/MyProducts/MyProducts";
+import MyWishList from "../../Pages/DashBoard/MyWishList/MyWishList";
 import Orders from "../../Pages/DashBoard/Orders/Orders";
+import RepotedItems from "../../Pages/DashBoard/RepotedItems/RepotedItems";
 import AllLaptops from "../../Pages/Home/allLapytops/AllLaptops";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -58,6 +62,22 @@ export const router = createBrowserRouter([
          {
             path: '/dashboard/addproducts',
             element: <AddProducts></AddProducts>
+         },
+         {
+            path: '/dashboard/myproducts',
+            element: <MyProducts></MyProducts>
+         },
+         {
+            path: '/dashboard/wishlist',
+            element: <MyWishList></MyWishList>
+         },
+         {
+            path: '/dashboard/buyers',
+            element: <MyBuyers></MyBuyers>
+         },
+         {
+            path: '/dashboard/report',
+            element: <RepotedItems></RepotedItems>
          },
       ]
     }
