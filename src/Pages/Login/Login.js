@@ -24,10 +24,9 @@ const Login = () => {
     const handleLogin = event => {
         event.preventDefault()
         const form = event.target
-        const users = form.user.value
         const email = form.email.value
         const password = form.password.value
-        logIn(email, password, users)
+        logIn(email, password)
             .then(result => {
                 const user = result.user
                 console.log(user);
@@ -37,8 +36,6 @@ const Login = () => {
             .catch(error => {
                 console.log(error);
             })
-
-        // console.log( email, users, password);
     }
 
     const handleGoogleSignIn = () => {
@@ -58,7 +55,7 @@ const Login = () => {
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <form onSubmit={handleLogin} className="card-body">
-                        <div className="form-control">
+                        {/* <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Type Of User</span>
                             </label>
@@ -66,7 +63,7 @@ const Login = () => {
                                 <option>Seller</option>
                                 <option>Buyers</option>
                             </select>
-                        </div>
+                        </div> */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
