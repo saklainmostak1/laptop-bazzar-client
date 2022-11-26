@@ -1,9 +1,10 @@
 import React from 'react';
 
+
 const DashBoard = () => {
     return (
         <div>
-            <h2>DashBoard</h2>
+            <h2>Hy dashBoard</h2>
         </div>
     );
 };
