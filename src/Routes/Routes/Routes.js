@@ -14,7 +14,9 @@ import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import PrivateRoute from "../PrivateRoutes/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 export const router = createBrowserRouter([
     {
@@ -53,7 +55,7 @@ export const router = createBrowserRouter([
       children: [
          {
             path: '/dashboard',
-            element: <Orders></Orders>
+            element: <BuyerRoute><Orders></Orders></BuyerRoute>
          },
          {
             path: '/dashboard/allusers',
@@ -61,23 +63,23 @@ export const router = createBrowserRouter([
          },
          {
             path: '/dashboard/addproducts',
-            element: <AddProducts></AddProducts>
+            element: <SellerRoute><AddProducts></AddProducts></SellerRoute>
          },
          {
             path: '/dashboard/myproducts',
-            element: <MyProducts></MyProducts>
+            element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
          },
          {
             path: '/dashboard/wishlist',
-            element: <MyWishList></MyWishList>
+            element: <BuyerRoute><MyWishList></MyWishList></BuyerRoute>
          },
          {
             path: '/dashboard/buyers',
-            element: <MyBuyers></MyBuyers>
+            element: <SellerRoute><MyBuyers></MyBuyers></SellerRoute>
          },
          {
             path: '/dashboard/report',
-            element: <RepotedItems></RepotedItems>
+            element: <AdminRoute><RepotedItems></RepotedItems></AdminRoute>
          },
       ]
     }
