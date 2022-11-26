@@ -40,6 +40,9 @@ const BookingModal = ({ bookingLaptop, setBookingLaptop }) => {
                     setBookingLaptop(null)
                     toast.success('SucessFully Booking')
                 }
+                // else{
+                //     toast.error('Laready Booked')
+                // }
 
             })
     }
