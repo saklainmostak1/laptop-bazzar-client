@@ -11,6 +11,7 @@ const Register = () => {
     const {createUser, googleLogin, updateUser} = useContext(AuthContext)
     const [signUpError, setSignUpError] = useState('')
     const navigate = useNavigate()
+
     const handleRegister = event => {
         event.preventDefault()
         const form = event.target 
@@ -18,19 +19,29 @@ const Register = () => {
         const users = form.user.value
         const email = form.email.value
         const password = form.password.value
-        console.log(name,users, email  , password);
+
+        // const saveUser = {
+        //     email, 
+        //     name,
+        //     users
+        // }
+        
+        // console.log(name, users, email  , password);
         setSignUpError('')
+
         createUser(email, password)
         .then(result => {
           const user = result.user
           console.log(user)
           toast.success('sucessFully create user')
+
           const userInfo = {
             displayName: name,
           }
+
           updateUser(userInfo)
           .then(() => {
-            navigate('/')
+           
           })
           .catch(error => console.log(error))
         })
@@ -39,7 +50,28 @@ const Register = () => {
           setSignUpError(error.message)
   
         })
+        const saveUser = {
+            email, 
+            name,
+            users
+        }
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(saveUser)
+        })
+        .then(Response => Response.json())
+        .then(data => {
+            console.log(data)
+            navigate('/')
+        })
+
+        
     }
+   
+
     const handleGoogleSignIn = () => {
         return googleLogin(googleProvider)
           .then(result => {
@@ -48,7 +80,9 @@ const Register = () => {
           })
           .catch(error => console.error(error))
       }
+     
 
+    
     return (
         <div className="hero ">
             <div className="hero-content flex-col">
