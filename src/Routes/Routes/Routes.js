@@ -4,6 +4,7 @@ import Main from "../../Layout/Main";
 import Blog from "../../Pages/Blog/Blog";
 import AddProducts from "../../Pages/DashBoard/AddProducts/AddProducts";
 import AllUsers from "../../Pages/DashBoard/AllUsers/AllUsers";
+import DashBoard from "../../Pages/DashBoard/DashBoard/DashBoard";
 import MyBuyers from "../../Pages/DashBoard/MyBuyers/MyBuyers";
 import MyProducts from "../../Pages/DashBoard/MyProducts/MyProducts";
 import MyWishList from "../../Pages/DashBoard/MyWishList/MyWishList";
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       children: [
          {
             path: '/dashboard',
+            element: <DashBoard></DashBoard>
+         },
+         {
+            path: '/dashboard/order',
             element: <BuyerRoute><Orders></Orders></BuyerRoute>
          },
          {
