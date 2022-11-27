@@ -86,7 +86,8 @@ const AddProducts = () => {
                         <label className="label">
                             <span className="label-text">Seller Name</span>
                         </label>
-                        <input type="text" 
+                        <input type="text"
+                        defaultValue={user.status} 
                         {...register('sellerName', {
                             required: 'Seller Name is required'
                         })}    
@@ -97,9 +98,10 @@ const AddProducts = () => {
                         <label className="label">
                             <span className="label-text">Seller email</span>
                         </label>
-                        <input type="text" 
+                        <input type="text"
+                        defaultValue={user.email} 
                         {...register('email', {
-                            required: 'Seller Name is required'
+                            required: 'Seller Email is required'
                         })}    
                             className="input input-bordered w-full max-w-xs"  />
                              
