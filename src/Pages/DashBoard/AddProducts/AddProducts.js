@@ -1,17 +1,64 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 
 const AddProducts = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm()
+    const {register, handleSubmit } = useForm()
     const imageHostKey = process.env.REACT_APP_imgbb_key
-    
-    const handleAddProducts = data =>{
-        console.log(data);
-    }
-    
-    
 
+    const navigate = useNavigate()
+
+    const handleAddProducts = data =>{
+        console.log(data.image[0]);
+        const image = data.image[0]
+        const formData = new FormData()
+        formData.append('image', image)
+        const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`
+        fetch(url, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(Response => Response.json())
+        .then(imgData => {
+            console.log(imgData);
+            if(imgData.success){
+                console.log(imgData.data.url);
+                const addProducts = {
+                  seller_name: data.sellerName ,
+                  location:  data.location,
+                  product_name: data.productName,
+                  posted_date: data.postedDate,
+                  img: imgData.data.url,
+                  original_price: data.originalPrice ,
+                  resale_price: data.resalePrice ,
+                  used_year: data.usesYear,
+                  condition: data.condition ,
+                  details: data.description,
+
+                }
+                fetch('http://localhost:5000/sellerProduct' , {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json',
+                        authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    },
+                    body: JSON.stringify(addProducts)
+                })
+                .then(Response => Response.json())
+                .then(result => {
+                    console.log(result);
+                    toast.success(`${data.productName}  sucessfully add`)
+                    navigate('/dashboard/myproducts')
+                })
+            }
+        })
+
+    }
+
+
+    
 
     
     return (
@@ -101,8 +148,19 @@ const AddProducts = () => {
                             <span className="label-text">Condition</span>
                         </label>
                         <input type="text"   
-                         {...register('Condition', {
+                         {...register('condition', {
                             required: 'Condition is required',
+                         })}   
+                            className="input input-bordered w-full max-w-xs" />
+                            
+                    </div>  
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Location</span>
+                        </label>
+                        <input type="text"   
+                         {...register('location', {
+                            required: 'Location is required',
                          })}   
                             className="input input-bordered w-full max-w-xs" />
                             
