@@ -63,7 +63,7 @@ const Orders = () => {
                                 </Link>
                                     }
                                     {
-                                        booking.prices && booking.paid && <span className='text-primary'>Paid</span>
+                                        booking.prices && booking.paid && <span className='text-green-500'>Paid</span>
                                     }
                                 </td>
                                

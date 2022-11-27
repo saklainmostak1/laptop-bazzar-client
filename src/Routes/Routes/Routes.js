@@ -15,6 +15,7 @@ import AllLaptops from "../../Pages/Home/allLapytops/AllLaptops";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
+import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import PrivateRoute from "../PrivateRoutes/PrivateRoute";
@@ -24,6 +25,7 @@ export const router = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <DisplayError></DisplayError>,
         children: [
             {
                path: '/',
@@ -54,10 +56,11 @@ export const router = createBrowserRouter([
     {
       path: '/dashboard',
       element:<PrivateRoute><DashBoardLayout></DashBoardLayout></PrivateRoute>,
+      errorElement: <DisplayError></DisplayError>,
       children: [
          {
             path: '/dashboard',
-            element: <DashBoard></DashBoard>
+            element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>
          },
          {
             path: '/dashboard/order',
