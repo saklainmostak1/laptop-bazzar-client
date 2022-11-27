@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthProvider';
 
 
 const AddProducts = () => {
+    const {user} = useContext(AuthContext)
+    
     const {register, handleSubmit } = useForm()
     const imageHostKey = process.env.REACT_APP_imgbb_key
 
     const navigate = useNavigate()
 
     const handleAddProducts = data =>{
-        console.log(data.image[0]);
+        console.log(data.email);
         const image = data.image[0]
         const formData = new FormData()
         formData.append('image', image)
-        const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
         fetch(url, {
             method: 'POST',
             body: formData,
@@ -24,18 +27,20 @@ const AddProducts = () => {
         .then(imgData => {
             console.log(imgData);
             if(imgData.success){
-                console.log(imgData.data.url);
+               
                 const addProducts = {
                   seller_name: data.sellerName ,
                   location:  data.location,
                   product_name: data.productName,
                   posted_date: data.postedDate,
+                  email: user.email,
                   img: imgData.data.url,
                   original_price: data.originalPrice ,
                   resale_price: data.resalePrice ,
                   used_year: data.usesYear,
                   condition: data.condition ,
                   details: data.description,
+                  
 
                 }
                 fetch('http://localhost:5000/sellerProduct' , {
@@ -62,7 +67,7 @@ const AddProducts = () => {
 
     
     return (
-        <div className='h-[800px] flex justify-center'>
+        <div className=' flex justify-center'>
             <div className='w-96 p-7'>
                 <h2 className='text-2xl text-center'>Add Products</h2>
                 <form onSubmit={handleSubmit(handleAddProducts)}>
@@ -86,6 +91,17 @@ const AddProducts = () => {
                             required: 'Seller Name is required'
                         })}    
                             className="input input-bordered w-full max-w-xs" />
+                             
+                    </div>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Seller email</span>
+                        </label>
+                        <input type="text" 
+                        {...register('email', {
+                            required: 'Seller Name is required'
+                        })}    
+                            className="input input-bordered w-full max-w-xs"  />
                              
                     </div>
                     <div className="form-control w-full max-w-xs">

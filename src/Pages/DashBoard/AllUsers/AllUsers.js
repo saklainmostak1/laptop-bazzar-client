@@ -8,9 +8,10 @@ const AllUsers = () => {
     const { data: users = [], refetch, status, isLoading } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users')
-            const data = await res.json()
-            return data;
+                const res = await fetch('http://localhost:5000/users')
+                const data = await res.json()
+                return data;
+            
         }
     })
     const handleMakeAdmin = id =>{
@@ -33,13 +34,16 @@ const AllUsers = () => {
         const proceed = window.confirm('Are You Sure delete')
         if(proceed){
             fetch(`http://localhost:5000/users/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
             })
             .then(Response => Response.json())
             .then(data => {
                 console.log(data);
-                toast.success('Delete Successfully')
                 refetch()
+                toast.success('Delete Successfully')
 
             })
         }
@@ -88,7 +92,7 @@ const AllUsers = () => {
                             key={user._id}
                             className="hover">
                                 <th>{i + 1}</th>
-                                <td>{user.name}</td>
+                                <td>{user?.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.role}</td>
                                 <td> {
