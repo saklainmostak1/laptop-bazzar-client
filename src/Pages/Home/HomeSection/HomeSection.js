@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Loading from '../../Shared/Loading/Loading';
 import img from './img.jpg'
 
 const HomeSection = () => {
+    const [loading, setLoading] = useState(false)
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+          setLoading(false)
+        }, )
+      }, [])
+      if(loading){
+        return <Loading></Loading>
+      }
     return (
 
         <div className="card m-10 bg-base-100 shadow-xl">

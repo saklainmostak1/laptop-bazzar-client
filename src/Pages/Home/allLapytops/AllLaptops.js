@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import BookingModal from '../../BookingModal/BookingModal';
+import Loading from '../../Shared/Loading/Loading';
 import LaptopCards from './LaptopCards';
 
 
@@ -12,14 +13,14 @@ const AllLaptops = () => {
         setLoading(true)
         setTimeout(() => {
           setLoading(false)
-        }, 1000)
+        }, )
       }, [])
     return (
         <div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6 gap-6'>
                 {
                     loading ?
-                    <button className="btn loading m-10">loading</button>
+                    <Loading></Loading>
                     : 
                     laptops?.map(laptop => <LaptopCards
                         key={laptop._id}

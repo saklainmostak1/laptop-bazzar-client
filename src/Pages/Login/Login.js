@@ -42,6 +42,8 @@ const Login = () => {
         return googleLogin(googleProvider)
             .then(result => {
                 const user = result.user
+                navigate('/')
+                toast.success('sucessfully login')
                 console.log(user);
             })
             .catch(error => console.error(error))

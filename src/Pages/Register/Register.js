@@ -28,13 +28,6 @@ const Register = () => {
         const email = form.email.value
         const password = form.password.value
 
-        // const saveUser = {
-        //     email, 
-        //     name,
-        //     users
-        // }
-        
-        // console.log(name, users, email  , password);
         setSignUpError('')
 
         createUser(email, password)
@@ -72,6 +65,7 @@ const Register = () => {
         })
         .then(Response => Response.json())
         .then(data => {
+            console.log(data);
             setCreatedUserEmail(email)
          
         })
@@ -95,10 +89,29 @@ const Register = () => {
           .then(result => {
             const user = result.user
             console.log(user);
+            navigate('/')
+            toast.success('SuccessFully Register')
+            
           })
           .catch(error => console.error(error))
+          
       }
+    //   const saveUser = {
+    //     googleProvider,
+       
+    // }
+    // fetch('http://localhost:5000/users', {
+    //     method: 'POST',
+    //     headers: {
+    //         'content-type': 'application/json'
+    //     },
+    //     body: JSON.stringify(saveUser)
+    // })
+    // .then(Response => Response.json())
+    // .then(data => {
+    //     setCreatedUserEmail(googleProvider)
      
+    // })
 
     
     return (
@@ -147,9 +160,10 @@ const Register = () => {
                         </div>
                         <p>Already Have An Account <Link className=' text-green-600' to='/login'> Go to  Login Please!!!</Link> </p>
                         <div className='divider'>OR</div>
-
-                        <button  onClick={handleGoogleSignIn}  className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
                     </form>
+                    <div>
+                    <button  onClick={handleGoogleSignIn}  className='btn btn-primary w-full mb-5'>CONTINUE WITH GOOGLE</button>
+                    </div>
                 </ div>
             </div>
         </div>

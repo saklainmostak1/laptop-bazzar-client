@@ -5,13 +5,13 @@ import HomeBanner from '../HomeBanner/HomeBanner';
 import HomeSection from '../HomeSection/HomeSection';
 
 const Home = () => {
+    
     return (
         <div>
             <HomeBanner></HomeBanner>
             <HomeSection></HomeSection>
             <Category></Category>
-            <AllLaptops></AllLaptops>
-           
+            <AllLaptops></AllLaptops>      
         </div>
     );
 };
