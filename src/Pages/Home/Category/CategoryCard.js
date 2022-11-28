@@ -1,7 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigation } from 'react-router-dom';
+import Loading from '../../Shared/Loading/Loading';
 
 const CategoryCard = ({ laptop }) => {
+    const navigation = useNavigation()
+
+    if(navigation.state === "loading"){
+        return <Loading></Loading>
+    }
 
     const { img, name, description, id } = laptop
     return (

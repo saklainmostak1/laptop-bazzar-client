@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 const LaptopCards = ({ laptop, setBookingLaptop }) => {
-  
-  const { details, img, location, original_price, posted_date, product_name, resale_price, seller_name, uses_year } = laptop
+
+  const { details, img, location, original_price, posted_date, product_name, resale_price, seller_name, uses_year} = laptop
   return (
     <div className="card m-10 shadow-xl">
       <figure><img className='w-full' src={img} alt="Shoes" /></figure>
@@ -22,9 +24,15 @@ const LaptopCards = ({ laptop, setBookingLaptop }) => {
         </div>
         <p className='text-center my-5'>{details}</p>
         <div className="card-actions justify-center">
-        <label onClick={() => setBookingLaptop(laptop)} 
-        htmlFor="booking-modal" 
-        className="btn btn-primary">Book Now</label>
+          <label onClick={() => setBookingLaptop(laptop)}
+            htmlFor="booking-modal"
+            className="btn btn-primary">Book Now</label>
+        </div>
+        <div className='text-center mt-5'>
+          <Link 
+          to={`/reportadmin/${laptop._id}`} className='text-blue-600 underline'>
+            Report To admin
+          </Link>
         </div>
       </div>
     </div>

@@ -108,10 +108,6 @@ const AllUsers = () => {
                                             onClick={() => handleVerify(user._id)}
                                             className='btn btn-warning btn-xs'>{user?.status ? status : 'pending'} </button>
                                         }
-
-                                        {/* <button className='btn btn-active btn-ghost btn-xs'>
-                                            {status ? status : 'Not Verify'}
-                                        </button> */}
                                     </td>
                                 <td> <button 
                                 onClick={() => handleDelete(user?._id)}

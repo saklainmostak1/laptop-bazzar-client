@@ -13,6 +13,7 @@ import Payment from "../../Pages/DashBoard/Payment/Payment";
 import RepotedItems from "../../Pages/DashBoard/RepotedItems/RepotedItems";
 import AllLaptops from "../../Pages/Home/allLapytops/AllLaptops";
 import Home from "../../Pages/Home/Home/Home";
+import ReportToAdmin from "../../Pages/Home/ReportToAdmin/ReportToAdmin";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
@@ -43,11 +44,18 @@ export const router = createBrowserRouter([
                path: '/blog',
                element: <Blog></Blog>
             },
+           
             {
                path: '/allLaptops/:id',
                element: <AllLaptops></AllLaptops>,
                loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
                
+            },
+            {
+               path: '/reportadmin/:id',
+               element: <ReportToAdmin></ReportToAdmin>,
+               loader: ({params}) => fetch(`http://localhost:5000/laptops/${params.id}`)
+
             },
             
            

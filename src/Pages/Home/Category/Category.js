@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { useNavigation } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
 import CategoryCard from './CategoryCard';
 
@@ -7,6 +8,7 @@ const Category = () => {
 
     // const [categoryLaptops, setCategoryLaptops] = useState([])
 
+    const navigation = useNavigation()
 
     const {data: categoryLaptops = [], isLoading } = useQuery({
         queryKey: ['categoryNames'], 
@@ -17,6 +19,9 @@ const Category = () => {
         }
     })
     if(isLoading){
+        return <Loading></Loading>
+    }
+    if(navigation.state === "loading"){
         return <Loading></Loading>
     }
 

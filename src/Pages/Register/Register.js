@@ -9,20 +9,20 @@ import useToken from '../../hooks/useToken';
 
 const Register = () => {
     const googleProvider = new GoogleAuthProvider()
-    const {createUser, googleLogin, updateUser} = useContext(AuthContext)
+    const { createUser, googleLogin, updateUser } = useContext(AuthContext)
     const [signUpError, setSignUpError] = useState('')
     const [createdUserEmail, setCreatedUserEmail] = useState('')
 
     const [token] = useToken(createdUserEmail)
     const navigate = useNavigate()
 
-    if(token){
+    if (token) {
         navigate('/')
     }
 
     const handleRegister = event => {
         event.preventDefault()
-        const form = event.target 
+        const form = event.target
         const name = form.name.value
         const users = form.user.value
         const email = form.email.value
@@ -31,28 +31,28 @@ const Register = () => {
         setSignUpError('')
 
         createUser(email, password)
-        .then(result => {
-          const user = result.user
-          console.log(user)
-          toast.success('sucessFully create user')
+            .then(result => {
+                const user = result.user
+                console.log(user)
+                toast.success('sucessFully create user')
 
-          const userInfo = {
-            displayName: name,
-          }
+                const userInfo = {
+                    displayName: name,
+                }
 
-          updateUser(userInfo)
-          .then(() => {
-           
-          })
-          .catch(error => console.log(error))
-        })
-        .catch(error => {
-          console.error(error)
-          setSignUpError(error.message)
-  
-        })
+                updateUser(userInfo)
+                    .then(() => {
+
+                    })
+                    .catch(error => console.log(error))
+            })
+            .catch(error => {
+                console.error(error)
+                setSignUpError(error.message)
+
+            })
         const saveUser = {
-            email, 
+            email,
             name,
             role: users
         }
@@ -63,14 +63,14 @@ const Register = () => {
             },
             body: JSON.stringify(saveUser)
         })
-        .then(Response => Response.json())
-        .then(data => {
-            console.log(data);
-            setCreatedUserEmail(email)
-         
-        })
+            .then(Response => Response.json())
+            .then(data => {
+                console.log(data);
+                setCreatedUserEmail(email)
 
-        
+            })
+
+
     }
     // const getUserToken = email =>{
     //     fetch(`http://localhost:5000/jwt?email=${email}`)
@@ -82,23 +82,23 @@ const Register = () => {
     //         }
     //     } )
     // }
-   
+
 
     const handleGoogleSignIn = () => {
         return googleLogin(googleProvider)
-          .then(result => {
-            const user = result.user
-            console.log(user);
-            navigate('/')
-            toast.success('SuccessFully Register')
-            
-          })
-          .catch(error => console.error(error))
-          
-      }
+            .then(result => {
+                const user = result.user
+                console.log(user);
+                navigate('/')
+                toast.success('SuccessFully Register')
+
+            })
+            .catch(error => console.error(error))
+
+    }
     //   const saveUser = {
     //     googleProvider,
-       
+
     // }
     // fetch('http://localhost:5000/users', {
     //     method: 'POST',
@@ -110,10 +110,10 @@ const Register = () => {
     // .then(Response => Response.json())
     // .then(data => {
     //     setCreatedUserEmail(googleProvider)
-     
+
     // })
 
-    
+
     return (
         <div className="hero ">
             <div className="hero-content flex-col">
@@ -121,7 +121,7 @@ const Register = () => {
                     <h1 className="text-5xl font-bold">Register now!</h1>
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <form   onSubmit={handleRegister} className="card-body">
+                    <form onSubmit={handleRegister} className="card-body">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Name</span>
@@ -160,10 +160,11 @@ const Register = () => {
                         </div>
                         <p>Already Have An Account <Link className=' text-green-600' to='/login'> Go to  Login Please!!!</Link> </p>
                         <div className='divider'>OR</div>
+                        <div>
+                            <button onClick={handleGoogleSignIn} className='btn btn-primary w-full mb-5'>CONTINUE WITH GOOGLE</button>
+                        </div>
                     </form>
-                    <div>
-                    <button  onClick={handleGoogleSignIn}  className='btn btn-primary w-full mb-5'>CONTINUE WITH GOOGLE</button>
-                    </div>
+
                 </ div>
             </div>
         </div>
