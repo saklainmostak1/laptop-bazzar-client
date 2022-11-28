@@ -7,7 +7,7 @@ import { AuthContext } from '../../../context/AuthProvider';
 
 const AddProducts = () => {
     const {user} = useContext(AuthContext)
-    
+    console.log(user.status);
     const {register, handleSubmit } = useForm()
     const imageHostKey = process.env.REACT_APP_imgbb_key
 

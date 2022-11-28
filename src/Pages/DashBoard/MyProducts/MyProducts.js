@@ -7,7 +7,7 @@ import Loading from '../../Shared/Loading/Loading';
 const MyProducts = () => {
 
     const {user} = useContext(AuthContext)
-    const { data: sellerProducts = [], status, isLoading, refetch } = useQuery({
+    const { data: sellerProducts = [],  isLoading, refetch } = useQuery({
         queryKey: ['sellerProducts'],
         queryFn: async () => {
             try {
@@ -59,8 +59,7 @@ const MyProducts = () => {
                             <th>Image</th>
                             <th>Product Name</th>
                             <th>Price</th>
-                            <th>Verified</th>
-                            <th>Status</th>
+                            
                             <th>Advertise</th>
                             <th>Delete</th>
                         </tr>
@@ -79,8 +78,6 @@ const MyProducts = () => {
                             }</td>
                           <td>{product.product_name}</td>
                           <td>{product.resale_price}</td>
-                          <td><button className='btn btn-warning btn-xs'>{user?.status ? status : 'pending'}</button></td>
-                          <td><button className='btn btn-success btn-xs'>Status</button></td>
                           <td><button className='btn btn-accent  btn-xs'>Advertise</button></td>
                           <td><button
                           onClick={() => handleDelete(product._id)}

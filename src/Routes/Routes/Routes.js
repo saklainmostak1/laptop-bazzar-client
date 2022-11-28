@@ -97,7 +97,10 @@ export const router = createBrowserRouter([
          {
             path: '/dashboard/report',
             element: <AdminRoute><RepotedItems></RepotedItems></AdminRoute>
+            
+
          },
+       
          {
             path: '/dashboard/payment/:id',
             element: <BuyerRoute><Payment></Payment></BuyerRoute>,

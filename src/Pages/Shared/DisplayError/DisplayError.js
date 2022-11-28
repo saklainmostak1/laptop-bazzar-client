@@ -17,9 +17,9 @@ const DisplayError = () => {
     }
     return (
         <div>
-            <img className='w-full flex justify-center' src={errorImg} alt="" />
-            <p className='text-red-600 font-bold'>{error.statusText || error.message}</p>
-            <h4 className='text-3xl font-bold'>
+            <img className='w-full mt-10' src={errorImg} alt="" />
+            <p className='text-red-600 font-bold text-center'>{error.statusText || error.message}</p>
+            <h4 className='text-3xl font-bold text-center'>
                 Please <button
                 onClick={handleLogOut}
                 className='btn btn-primary'>LogOut</button> And Login Again</h4>

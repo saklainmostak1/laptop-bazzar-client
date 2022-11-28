@@ -2,8 +2,12 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { useLoaderData } from 'react-router-dom';
 
+
+
 const ReportToAdmin = () => {
     const reportProduct = useLoaderData()
+    console.log(reportProduct);
+    
     const { product_name, seller_name } = reportProduct
 
     const handleReport = event =>{
@@ -78,8 +82,6 @@ const ReportToAdmin = () => {
                     name='email'
                         className="input input-bordered input-success  w-full max-w-xs" />
                 </div>
-               
-
                    <div className='w-full '>
                    <label className="label">
                         <span className="label-text">Your Message To admin</span>

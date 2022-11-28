@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, useNavigation } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
 
+
+
 const CategoryCard = ({ laptop }) => {
     const navigation = useNavigation()
 
@@ -20,7 +22,7 @@ const CategoryCard = ({ laptop }) => {
                 <p>{description}</p>
                 <div className="card-actions justify-center">
                     <Link to={`/allLaptops/${id}`}>
-                        <button className="btn btn-primary mt-5">Buy {name} From Here </button>
+                        <button className="btn btn-primary mt-5 underline ">Buy {name} From Here </button>
                     </Link>
                 </div>
             </div>

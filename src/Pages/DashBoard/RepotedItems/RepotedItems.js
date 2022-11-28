@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 import Loading from '../../Shared/Loading/Loading';
 
 
-
 const RepotedItems = () => {
-
+    
+   
     const { data: reports = [], refetch, isLoading } = useQuery({
-        queryKey: ['users'],
+        queryKey: ['reports'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/reports')
             const data = await res.json()
@@ -16,6 +17,25 @@ const RepotedItems = () => {
 
         }
     })
+     
+    const handleDelete = (id) =>{
+        const proceed = window.confirm('Are You Sure delete')
+        if(proceed){
+            fetch(`http://localhost:5000/reports/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+            .then(Response => Response.json())
+            .then(data => {
+              console.log(data)
+                refetch()
+                toast.success('Delete Successfully')
+            })
+        }
+    }
+
     if(isLoading){
         return <Loading></Loading>
     }
@@ -33,7 +53,8 @@ const RepotedItems = () => {
                             <th>Seller Name</th>
                             <th>Repoted Person Name</th>
                             <th>Repoted Message</th>
-                            <th>Delete</th>
+                            <th>Delete Report</th>
+                            <th>Delete Product</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,7 +68,10 @@ const RepotedItems = () => {
                                 <td>{report.seller_name}</td>
                                 <td>{report.user_name}</td>
                                 <td>{report.report_message}</td>
-                                <td><button className='btn btn-primary btn-xs'>Delete</button></td>
+                                <td> <button 
+                                onClick={() => handleDelete(report?._id)}
+                                className='btn btn-accent btn-xs'>Delete</button></td>
+                               
                             </tr>)
                         }
 

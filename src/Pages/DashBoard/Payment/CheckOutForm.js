@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 
 const CheckOutForm = ({ payments }) => {
@@ -39,7 +40,8 @@ const CheckOutForm = ({ payments }) => {
         if (card === null) {
             return
         }
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        // paymentMethod
+        const { error,  } = await stripe.createPaymentMethod({
             type: 'card',
             card
         })
@@ -98,6 +100,7 @@ const CheckOutForm = ({ payments }) => {
                     if (data.insertedId) {
                         setSuccess('Payment SucessFully')
                         setTransactionId(paymentIntent.id)
+                        toast.success('payment sucessfully')
                     }
                 })
 

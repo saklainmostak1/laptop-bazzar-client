@@ -9,6 +9,7 @@ const AllLaptops = () => {
     const laptops = useLoaderData([])
     const [bookingLaptop, setBookingLaptop] = useState(null)
     const [loading, setLoading] = useState(false)
+  
     useEffect(() => {
         setLoading(true)
         setTimeout(() => {
@@ -27,15 +28,22 @@ const AllLaptops = () => {
                         laptop={laptop}
                         setBookingLaptop={setBookingLaptop}
                     ></LaptopCards>)
+                        
+                  
                 }
+                  
 
             </div>
-            {bookingLaptop &&
+       
+           {bookingLaptop &&
                 <BookingModal
                 setBookingLaptop={setBookingLaptop}
                     bookingLaptop={bookingLaptop}
+                    
                 ></BookingModal>
             }
+          
+           
         </div>
     );
 };

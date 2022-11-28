@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { useNavigation } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
 
 const AllUsers = () => {
+   
     
     const { data: users = [], refetch, status, isLoading } = useQuery({
         queryKey: ['users'],
@@ -14,6 +16,12 @@ const AllUsers = () => {
             
         }
     })
+    const navigation = useNavigation()
+
+    if(navigation.state === "loading"){
+        return <Loading></Loading>
+    }
+    
     const handleMakeAdmin = id =>{
         fetch(`http://localhost:5000/users/admin/${id}`, {
             method: 'PUT',

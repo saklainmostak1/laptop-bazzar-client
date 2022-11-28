@@ -1,8 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigation } from 'react-router-dom';
+import { FaCheck } from "react-icons/fa";
+import Loading from '../../Shared/Loading/Loading';
 
 
 const LaptopCards = ({ laptop, setBookingLaptop }) => {
+
+
+  const navigation = useNavigation()
+
+    if(navigation.state === "loading"){
+        return <Loading></Loading>
+    }
+
 
   const { details, img, location, original_price, posted_date, product_name, resale_price, seller_name, uses_year} = laptop
   return (
@@ -11,7 +21,7 @@ const LaptopCards = ({ laptop, setBookingLaptop }) => {
       <div className="card-body">
         <h2 className="card-title">{product_name}</h2>
         <div className='flex justify-between my-3'>
-          <h5 > <strong>Seller Name:</strong> {seller_name}</h5>
+          <h5 > <strong>Seller Name:</strong> {seller_name} <p className='text-green-600'><  FaCheck></FaCheck></p> </h5>
           <h5><strong>Location:</strong> {location}</h5>
         </div>
         <div className='flex justify-between my-3'>
@@ -33,6 +43,9 @@ const LaptopCards = ({ laptop, setBookingLaptop }) => {
           to={`/reportadmin/${laptop._id}`} className='text-blue-600 underline'>
             Report To admin
           </Link>
+          <div>
+            <button>Delete</button>
+          </div>
         </div>
       </div>
     </div>
