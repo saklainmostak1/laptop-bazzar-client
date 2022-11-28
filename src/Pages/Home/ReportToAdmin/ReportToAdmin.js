@@ -27,7 +27,7 @@ const ReportToAdmin = () => {
             email,
             report_message: message,
         }
-        fetch('http://localhost:5000/reports', {
+        fetch('https://used-product-resale-server-vert.vercel.app/reports', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

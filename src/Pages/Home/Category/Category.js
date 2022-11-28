@@ -13,7 +13,7 @@ const Category = () => {
     const {data: categoryLaptops = [], isLoading } = useQuery({
         queryKey: ['categoryNames'], 
         queryFn: async() =>{
-            const res = await fetch('http://localhost:5000/categoryNames')
+            const res = await fetch('https://used-product-resale-server-vert.vercel.app/categoryNames')
             const data = await res.json()
             return data
         }
@@ -26,7 +26,7 @@ const Category = () => {
     }
 
     // useEffect(() =>{  
-    //     fetch('http://localhost:5000/categoryNames')
+    //     fetch('https://used-product-resale-server-vert.vercel.app/categoryNames')
     //     .then(Response => Response.json())
     //     .then(data => setCategoryLaptops(data))
     // }, [])

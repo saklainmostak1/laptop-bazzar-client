@@ -43,7 +43,7 @@ const AddProducts = () => {
                   
 
                 }
-                fetch('http://localhost:5000/sellerProduct' , {
+                fetch('https://used-product-resale-server-vert.vercel.app/sellerProduct' , {
                     method: "POST",
                     headers: {
                         'content-type': 'application/json',

@@ -10,7 +10,7 @@ const RepotedItems = () => {
     const { data: reports = [], refetch, isLoading } = useQuery({
         queryKey: ['reports'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/reports')
+            const res = await fetch('https://used-product-resale-server-vert.vercel.app/reports')
             const data = await res.json()
             console.log(data);
             return data;
@@ -21,7 +21,7 @@ const RepotedItems = () => {
     const handleDelete = (id) =>{
         const proceed = window.confirm('Are You Sure delete')
         if(proceed){
-            fetch(`http://localhost:5000/reports/${id}`, {
+            fetch(`https://used-product-resale-server-vert.vercel.app/reports/${id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`

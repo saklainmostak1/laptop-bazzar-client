@@ -48,13 +48,13 @@ export const router = createBrowserRouter([
             {
                path: '/allLaptops/:id',
                element: <AllLaptops></AllLaptops>,
-               loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
+               loader: ({params}) => fetch(`https://used-product-resale-server-vert.vercel.app/category/${params.id}`)
                
             },
             {
                path: '/reportadmin/:id',
                element: <ReportToAdmin></ReportToAdmin>,
-               loader: ({params}) => fetch(`http://localhost:5000/laptops/${params.id}`)
+               loader: ({params}) => fetch(`https://used-product-resale-server-vert.vercel.app/laptops/${params.id}`)
 
             },
             
@@ -104,7 +104,7 @@ export const router = createBrowserRouter([
          {
             path: '/dashboard/payment/:id',
             element: <BuyerRoute><Payment></Payment></BuyerRoute>,
-            loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
+            loader: ({params}) => fetch(`https://used-product-resale-server-vert.vercel.app/bookings/${params.id}`)
          },
       ]
     }

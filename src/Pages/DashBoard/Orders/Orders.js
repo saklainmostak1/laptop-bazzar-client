@@ -7,7 +7,7 @@ import Loading from '../../Shared/Loading/Loading';
 const Orders = () => {
     const { user } = useContext(AuthContext)
 
-    const url = `http://localhost:5000/bookings?email=${user?.email}`
+    const url = `https://used-product-resale-server-vert.vercel.app/bookings?email=${user?.email}`
 
     const { data: bookings = [], isLoading } = useQuery({
         queryKey: ['bookings', user?.email],
@@ -50,7 +50,7 @@ const Orders = () => {
                                 key={booking._id}
                                 className="hover">
                                 <th>{i + 1}</th>
-                                <td>{booking.user}</td>
+                                <td>{booking.displayName}</td>
                                 <td>{booking.products}</td>
                                <td>{booking.prices}</td>
                                 <td>{booking.phone}</td>

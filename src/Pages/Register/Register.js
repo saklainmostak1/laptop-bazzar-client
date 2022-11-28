@@ -56,7 +56,7 @@ const Register = () => {
             name,
             role: users
         }
-        fetch('http://localhost:5000/users', {
+        fetch('https://used-product-resale-server-vert.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -73,7 +73,7 @@ const Register = () => {
 
     }
     // const getUserToken = email =>{
-    //     fetch(`http://localhost:5000/jwt?email=${email}`)
+    //     fetch(`https://used-product-resale-server-vert.vercel.app/jwt?email=${email}`)
     //     .then(Response => Response.json())
     //     .then(data => {
     //         if(data.accessToken){
@@ -88,6 +88,7 @@ const Register = () => {
         return googleLogin(googleProvider)
             .then(result => {
                 const user = result.user
+                
                 console.log(user);
                 navigate('/')
                 toast.success('SuccessFully Register')
@@ -100,7 +101,7 @@ const Register = () => {
     //     googleProvider,
 
     // }
-    // fetch('http://localhost:5000/users', {
+    // fetch('https://used-product-resale-server-vert.vercel.app/users', {
     //     method: 'POST',
     //     headers: {
     //         'content-type': 'application/json'

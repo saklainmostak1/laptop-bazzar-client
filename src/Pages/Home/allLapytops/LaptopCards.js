@@ -43,9 +43,6 @@ const LaptopCards = ({ laptop, setBookingLaptop }) => {
           to={`/reportadmin/${laptop._id}`} className='text-blue-600 underline'>
             Report To admin
           </Link>
-          <div>
-            <button>Delete</button>
-          </div>
         </div>
       </div>
     </div>
